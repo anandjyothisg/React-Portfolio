@@ -168,7 +168,7 @@ export default function Hero() {
                 <div className="relative rounded-2xl overflow-hidden aspect-square bg-gradient-to-br from-indigo-100 to-purple-100">
                   {/* Your Image */}
                   <img 
-                    src="/images/myimage.png" 
+                    src="/images/hero_image2.jpg" 
                     alt="Your Name" 
                     className="w-full h-full object-cover"
                   />
