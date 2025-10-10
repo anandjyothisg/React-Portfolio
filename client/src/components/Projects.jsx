@@ -41,7 +41,7 @@ export default function Projects() {
           {projects.map((project, idx) => (
             <div key={idx} className="backdrop-blur-lg bg-white/40 rounded-3xl overflow-hidden border border-white/30 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group">
               {/* Project Image Container */}
-              <div className="relative h-64 overflow-hidden bg-gradient-to-br from-cyan-100 to-teal-100">
+              <div className="relative h-64 overflow-hidden bg-gradient-to-br from-purple-100 to-pink-100">
                 <img 
                   src={project.image} 
                   alt={project.title}
@@ -79,9 +79,9 @@ export default function Projects() {
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="relative group/btn inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-cyan-500 to-teal-500 rounded-full text-white font-medium overflow-hidden transition-all duration-300 hover:shadow-xl hover:scale-105"
+                  className="relative group/btn inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-white font-medium overflow-hidden transition-all duration-300 hover:shadow-xl hover:scale-105"
                 >
-                  <span className="absolute inset-0 bg-gradient-to-r from-teal-500 to-cyan-500 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-500 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></span>
                   <Github className="w-5 h-5 relative z-10 transition-transform duration-300 group-hover/btn:rotate-12" />
                   <span className="relative z-10">View on GitHub</span>
                   <svg 

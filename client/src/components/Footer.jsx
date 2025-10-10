@@ -1,5 +1,3 @@
-// src/components/Contact.jsx
-
 import React from 'react';
 import { Github, Linkedin, Mail } from 'lucide-react';
 
@@ -17,15 +15,33 @@ export default function Contact() {
             <p className="text-xl text-slate-700 text-center font-light leading-relaxed">
               I'm always interested in hearing about new projects and opportunities.
             </p>
-            
+
             <div className="flex justify-center gap-6 pt-8">
-              <a href="mailto:anandjyothis57.com" className="backdrop-blur-md bg-white/60 hover:bg-white/80 w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 border border-white/30 hover:scale-110 shadow-lg">
+              {/* Email */}
+              <a
+                href="mailto:anandjyothis57@gmail.com"
+                className="backdrop-blur-md bg-white/60 hover:bg-white/80 w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 border border-white/30 hover:scale-110 shadow-lg"
+              >
                 <Mail className="w-7 h-7 text-slate-700" />
               </a>
-              <a href="https://github.com/anandjyothisg" className="backdrop-blur-md bg-white/60 hover:bg-white/80 w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 border border-white/30 hover:scale-110 shadow-lg">
+
+              {/* GitHub */}
+              <a
+                href="https://github.com/anandjyothisg"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="backdrop-blur-md bg-white/60 hover:bg-white/80 w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 border border-white/30 hover:scale-110 shadow-lg"
+              >
                 <Github className="w-7 h-7 text-slate-700" />
               </a>
-              <a href="https://linkedin.com/in/anand-jyothis" className="backdrop-blur-md bg-white/60 hover:bg-white/80 w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 border border-white/30 hover:scale-110 shadow-lg">
+
+              {/* LinkedIn */}
+              <a
+                href="https://linkedin.com/in/anand-jyothis"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="backdrop-blur-md bg-white/60 hover:bg-white/80 w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 border border-white/30 hover:scale-110 shadow-lg"
+              >
                 <Linkedin className="w-7 h-7 text-slate-700" />
               </a>
             </div>
@@ -35,4 +51,3 @@ export default function Contact() {
     </section>
   );
 }
-
