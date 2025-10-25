@@ -4,29 +4,45 @@ import { ExternalLink, Github } from 'lucide-react';
 export default function Projects() {
   const projects = [
     {
-      title: "E-Commerce Platform",
-      description: "Full-stack application with React, Node.js, and MongoDB",
+      title: "NurtureMe",
+      description: "A skin type classification model deployed using Django for Backend and HTML, CSS and JS for Frontend and integrated with Google Firebase for authentication.",
       tech: ["React", "Node.js", "MongoDB", "Stripe"],
       link: "#",
-      github: "https://github.com/yourusername/ecommerce-platform",
+      github: "https://github.com/anandjyothisg/skin-type-recognition",
       image: "https://images.unsplash.com/photo-1557821552-17105176677c?w=800&q=80"
     },
     {
-      title: "AI Content Generator",
-      description: "Machine learning powered content creation tool",
+      title: "Telemed",
+      description: "A Telemedicine integartion platform based idea for remote villages to get acces with doctor's appointment and other medical supplies.",
       tech: ["Python", "TensorFlow", "FastAPI", "React"],
       link: "#",
-      github: "https://github.com/yourusername/ai-content-generator",
+      github: "https://github.com/anandjyothisg/Telemedicine",
       image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80"
     },
     {
-      title: "Task Management App",
-      description: "Collaborative workspace with real-time updates",
+      title: "Deeptron",
+      description: "A deepfake classifiaction model that classifies real and deepfake videos through the links or through direct media upload.",
       tech: ["React", "Firebase", "Tailwind", "TypeScript"],
       link: "#",
-      github: "https://github.com/yourusername/task-management",
+      github: "https://github.com/anandjyothisg/Deeptron---Deepfake-Analysis",
       image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80"
-    }
+    },
+     {
+      title: "Oxidative Stress Prediction",
+      description: "Currently undergoing a research for predicting the oxidative stress using Machine Learning algorithms with the guidance of doctor's advice in Mirakle cancer treatment centre.",
+      tech: ["React", "Firebase", "Tailwind", "TypeScript"],
+      link: "#",
+      github: "https://github.com/anandjyothisg/Oxiscan",
+      image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80"
+    },
+    {
+      title: "Oxidative Stress Prediction",
+      description: "Currently undergoing a research for predicting the oxidative stress using Machine Learning algorithms with the guidance of doctor's advice in Mirakle cancer treatment centre.",
+      tech: ["React", "Firebase", "Tailwind", "TypeScript"],
+      link: "#",
+      github: "https://github.com/anandjyothisg/Oxiscan",
+      image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80"
+    }   
   ];
 
   return (
