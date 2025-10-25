@@ -72,7 +72,7 @@ export default function Loader({ onLoadComplete }) {
           muted
           className="w-full h-full object-cover"
         >
-          <source src="/images/Loader.mp4" type="video/mp4" />
+          <source src="/images/Loader2.mp4" type="video/mp4" />
         </video>
       </div>
 
@@ -92,7 +92,7 @@ export default function Loader({ onLoadComplete }) {
           muted
           className="w-full h-full object-cover"
         >
-          <source src="/images/Loader.mp4" type="video/mp4" />
+          <source src="/images/Loader2.mp4" type="video/mp4" />
         </video>
       </div>
 
