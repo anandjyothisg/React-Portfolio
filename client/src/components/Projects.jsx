@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ExternalLink, Github } from 'lucide-react';
 
 export default function Projects() {
+  const [visibleProjects, setVisibleProjects] = useState([]);
+  const projectRefs = useRef([]);
+
   const projects = [
     {
       title: "NurtureMe",
@@ -9,118 +12,200 @@ export default function Projects() {
       tech: ["React", "Node.js", "MongoDB", "Stripe"],
       link: "#",
       github: "https://github.com/anandjyothisg/skin-type-recognition",
-      image: "https://images.unsplash.com/photo-1557821552-17105176677c?w=800&q=80"
+      image: "/images/Nurtureme.png"
     },
     {
       title: "Telemed",
-      description: "A Telemedicine integartion platform based idea for remote villages to get acces with doctor's appointment and other medical supplies.",
+      description: "A Telemedicine integration platform based idea for remote villages to get access with doctor's appointment and other medical supplies.",
       tech: ["Python", "TensorFlow", "FastAPI", "React"],
       link: "#",
       github: "https://github.com/anandjyothisg/Telemedicine",
-      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80"
+      image: "/images/Telemed.png"
     },
     {
       title: "Deeptron",
-      description: "A deepfake classifiaction model that classifies real and deepfake videos through the links or through direct media upload.",
+      description: "A deepfake classification model that classifies real and deepfake videos through the links or through direct media upload.",
       tech: ["React", "Firebase", "Tailwind", "TypeScript"],
       link: "#",
       github: "https://github.com/anandjyothisg/Deeptron---Deepfake-Analysis",
-      image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80"
-    },
-     {
-      title: "Oxidative Stress Prediction",
-      description: "Currently undergoing a research for predicting the oxidative stress using Machine Learning algorithms with the guidance of doctor's advice in Mirakle cancer treatment centre.",
-      tech: ["React", "Firebase", "Tailwind", "TypeScript"],
-      link: "#",
-      github: "https://github.com/anandjyothisg/Oxiscan",
-      image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80"
+      image: "/images/Deeptron.png"
     },
     {
       title: "Oxidative Stress Prediction",
       description: "Currently undergoing a research for predicting the oxidative stress using Machine Learning algorithms with the guidance of doctor's advice in Mirakle cancer treatment centre.",
-      tech: ["React", "Firebase", "Tailwind", "TypeScript"],
+      tech: ["Machine Learning", "Python", "Research"],
       link: "#",
       github: "https://github.com/anandjyothisg/Oxiscan",
-      image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80"
-    }   
+      image: "/images/Oxiscan.png"
+    }
   ];
 
+  useEffect(() => {
+    const observers = projectRefs.current.map((ref, idx) => {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setVisibleProjects((prev) => [...new Set([...prev, idx])]);
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+
+      if (ref) observer.observe(ref);
+      return observer;
+    });
+
+    return () => {
+      observers.forEach((observer) => observer.disconnect());
+    };
+  }, []);
+
   return (
-    <section id="projects" className="min-h-screen flex items-center justify-center px-6 py-32">
-      <div className="max-w-7xl w-full space-y-12">
-        <div className="text-center space-y-4 mb-20">
-          <h2 className="text-5xl font-extralight text-slate-900 tracking-tight">Featured Work</h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-cyan-500 to-teal-400 mx-auto rounded-full"></div>
+    <section id="projects" className="min-h-screen flex items-center justify-center px-8 py-32 bg-neutral-50">
+      <div className="max-w-7xl w-full space-y-32">
+        {/* Decorative Divider */}
+        <div className="flex items-center justify-center gap-3 opacity-0 animate-fadeIn">
+          <div className="w-12 h-px bg-black"></div>
+          <svg width="24" height="12" viewBox="0 0 24 12" fill="none" className="text-black">
+            <path d="M2 6L6 2M6 2L10 6M6 2V10M14 6L18 10M18 10L22 6M18 10V2" stroke="currentColor" strokeWidth="1.5"/>
+          </svg>
+          <div className="w-12 h-px bg-black"></div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* Projects List */}
+        <div className="space-y-40">
           {projects.map((project, idx) => (
-            <div key={idx} className="backdrop-blur-lg bg-white/40 rounded-3xl overflow-hidden border border-white/30 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group">
-              {/* Project Image Container */}
-              <div className="relative h-64 overflow-hidden bg-gradient-to-br from-purple-100 to-pink-100">
-                <img 
-                  src={project.image} 
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                
-                {/* Live Preview Button */}
-                <a 
-                  href={project.link}
-                  className="absolute top-4 right-4 backdrop-blur-md bg-white/90 hover:bg-white w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 hover:scale-110 shadow-lg"
-                >
-                  <ExternalLink className="w-5 h-5 text-slate-700" />
-                </a>
+            <div 
+              key={idx}
+              ref={(el) => (projectRefs.current[idx] = el)}
+              className={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-center transition-all duration-1000 ${
+                idx % 2 === 0 ? '' : 'lg:grid-flow-dense'
+              } ${
+                visibleProjects.includes(idx)
+                  ? 'opacity-100 translate-y-0'
+                  : 'opacity-0 translate-y-20'
+              }`}
+            >
+              {/* Image */}
+              <div 
+                className={`${idx % 2 === 0 ? 'lg:order-2' : 'lg:order-1'} transition-all duration-1000 delay-200 ${
+                  visibleProjects.includes(idx)
+                    ? 'opacity-100 translate-x-0'
+                    : idx % 2 === 0
+                    ? 'opacity-0 translate-x-20'
+                    : 'opacity-0 -translate-x-20'
+                }`}
+              >
+                <div className="relative overflow-hidden bg-neutral-200 aspect-[4/3] group">
+                  <img 
+                    src={project.image} 
+                    alt={project.title}
+                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                  />
+                </div>
               </div>
 
-              {/* Project Details */}
-              <div className="p-8 space-y-6">
-                <div className="space-y-3">
-                  <h3 className="text-3xl font-light text-slate-900">{project.title}</h3>
-                  <p className="text-slate-600 leading-relaxed">{project.description}</p>
+              {/* Content */}
+              <div 
+                className={`space-y-8 ${idx % 2 === 0 ? 'lg:order-1 lg:pr-12' : 'lg:order-2 lg:pl-12'} transition-all duration-1000 delay-300 ${
+                  visibleProjects.includes(idx)
+                    ? 'opacity-100 translate-x-0'
+                    : idx % 2 === 0
+                    ? 'opacity-0 -translate-x-20'
+                    : 'opacity-0 translate-x-20'
+                }`}
+              >
+                <div className="space-y-6">
+                  <h3 className="text-3xl font-light tracking-wide text-black uppercase">
+                    {project.title}
+                  </h3>
+                  
+                  <div className={`h-px bg-black transition-all duration-1000 delay-500 ${
+                    visibleProjects.includes(idx) ? 'w-16' : 'w-0'
+                  }`}></div>
+                  
+                  <p className="text-sm text-neutral-600 leading-relaxed">
+                    {project.description}
+                  </p>
                 </div>
 
                 {/* Tech Stack */}
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-3">
                   {project.tech.map((tech, i) => (
-                    <span key={i} className="backdrop-blur-md bg-white/60 px-3 py-1.5 rounded-full text-sm text-slate-700 border border-white/30">
+                    <span 
+                      key={i} 
+                      className={`text-xs text-neutral-500 px-3 py-1.5 border border-neutral-300 transition-all duration-500 ${
+                        visibleProjects.includes(idx)
+                          ? 'opacity-100 translate-y-0'
+                          : 'opacity-0 translate-y-4'
+                      }`}
+                      style={{ transitionDelay: `${600 + i * 100}ms` }}
+                    >
                       {tech}
                     </span>
                   ))}
                 </div>
 
-                {/* Animated GitHub Button */}
-                <a 
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="relative group/btn inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-white font-medium overflow-hidden transition-all duration-300 hover:shadow-xl hover:scale-105"
-                >
-                  <span className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-500 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></span>
-                  <Github className="w-5 h-5 relative z-10 transition-transform duration-300 group-hover/btn:rotate-12" />
-                  <span className="relative z-10">View on GitHub</span>
-                  <svg 
-                    className="w-4 h-4 relative z-10 transition-transform duration-300 group-hover/btn:translate-x-1" 
-                    fill="none" 
-                    viewBox="0 0 24 24" 
-                    stroke="currentColor"
+                {/* Links */}
+                <div className="flex gap-6 pt-4">
+                  <a 
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`flex items-center gap-2 text-xs uppercase tracking-widest text-black hover:text-neutral-500 transition-all duration-500 ${
+                      visibleProjects.includes(idx)
+                        ? 'opacity-100 translate-y-0'
+                        : 'opacity-0 translate-y-4'
+                    }`}
+                    style={{ transitionDelay: '900ms' }}
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
-                  
-                  {/* Animated particles */}
-                  <span className="absolute inset-0 overflow-hidden rounded-full">
-                    <span className="absolute w-2 h-2 bg-white/30 rounded-full top-1/2 left-1/4 animate-ping"></span>
-                    <span className="absolute w-1.5 h-1.5 bg-white/40 rounded-full top-1/3 right-1/3 animate-ping animation-delay-150"></span>
-                    <span className="absolute w-1 h-1 bg-white/30 rounded-full bottom-1/3 left-1/2 animate-ping animation-delay-300"></span>
-                  </span>
-                </a>
+                    <Github className="w-4 h-4" />
+                    <span>GitHub</span>
+                  </a>
+                  <a 
+                    href={project.link}
+                    className={`flex items-center gap-2 text-xs uppercase tracking-widest text-black hover:text-neutral-500 transition-all duration-500 ${
+                      visibleProjects.includes(idx)
+                        ? 'opacity-100 translate-y-0'
+                        : 'opacity-0 translate-y-4'
+                    }`}
+                    style={{ transitionDelay: '1000ms' }}
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    <span>View Live</span>
+                  </a>
+                </div>
               </div>
             </div>
           ))}
         </div>
+
+        {/* Bottom Decorative Divider */}
+        <div className="flex items-center justify-center gap-3">
+          <div className="w-12 h-px bg-black"></div>
+          <svg width="24" height="12" viewBox="0 0 24 12" fill="none" className="text-black">
+            <path d="M2 6L6 2M6 2L10 6M6 2V10M14 6L18 10M18 10L22 6M18 10V2" stroke="currentColor" strokeWidth="1.5"/>
+          </svg>
+          <div className="w-12 h-px bg-black"></div>
+        </div>
       </div>
+
+      <style jsx>{`
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
+        .animate-fadeIn {
+          animation: fadeIn 1s ease-out forwards;
+        }
+      `}</style>
     </section>
   );
 }

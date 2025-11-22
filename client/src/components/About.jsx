@@ -1,25 +1,22 @@
 import React from 'react';
-import { Code, Palette, Zap, Sparkles, Rocket, Brain, GraduationCap, Users, Award, Trophy } from 'lucide-react';
+import { Code, Sparkles, Rocket, Brain, GraduationCap, Users, Award, Trophy, Zap, Binary } from 'lucide-react';
 
 export default function About() {
   const skills = [
     { 
       icon: Brain, 
       name: "Machine Learning", 
-      desc: "Deep learning models, neural networks, and AI solutions",
-      color: "from-purple-500 to-pink-500"
+      desc: "Deep learning models, neural networks, and AI solutions"
     },
     { 
       icon: Code, 
       name: "Development", 
-      desc: "Full-stack development with modern frameworks",
-      color: "from-blue-500 to-cyan-500"
+      desc: "Full-stack development with modern frameworks"
     },
     { 
       icon: Rocket, 
       name: "Deployment", 
-      desc: "MLOps, cloud infrastructure, and scalable systems",
-      color: "from-indigo-500 to-purple-500"
+      desc: "MLOps, cloud infrastructure, and scalable systems"
     }
   ];
 
@@ -29,24 +26,21 @@ export default function About() {
       field: "Secondary School",
       school: "Shri Vidhya Mandhir CBSE School, Pushpathur",
       year: "2019 - 2021",
-      icon: GraduationCap,
-      color: "from-blue-500 to-cyan-500"
+      icon: GraduationCap
     },
     {
       degree: "HSC",
       field: "Higher Secondary",
       school: "Shri Vidhya Mandhir CBSE School, Pushpathur",
       year: "2021 - 2023",
-      icon: Award,
-      color: "from-emerald-500 to-teal-500"
+      icon: Award
     },
     {
       degree: "BE. CSE (AI & ML)",
       field: "Artificial Intelligence and Machine Learning",
       school: "Dr. Mahalingam College of Engineering and Technology, Pollachi",
       year: "2023 - 2027",
-      icon: Brain,
-      color: "from-purple-500 to-pink-500"
+      icon: Brain
     }
   ];
 
@@ -55,116 +49,128 @@ export default function About() {
       title: "Tech Lead",
       org: "AI Innovation Lab",
       desc: "Leading a team of 12 engineers in developing next-gen ML solutions",
-      icon: Users,
-      gradient: "from-violet-500 via-purple-500 to-fuchsia-500"
+      icon: Users
     },
     {
       title: "Open Source Maintainer",
       org: "ML Framework Contributors",
       desc: "Managing community of 5K+ developers and 50+ contributors",
-      icon: Code,
-      gradient: "from-cyan-500 via-blue-500 to-indigo-500"
+      icon: Code
     },
     {
       title: "Conference Speaker",
       org: "Global Tech Events",
       desc: "Keynote speaker at 15+ international AI/ML conferences",
-      icon: Trophy,
-      gradient: "from-amber-500 via-orange-500 to-red-500"
+      icon: Trophy
     }
   ];
 
   return (
-    <section id="about" className="w-full px-4 sm:px-6 lg:px-8 py-20 md:py-32">
-      <div className="max-w-7xl mx-auto space-y-16">
+    <section id="about" className="w-full px-6 py-32 bg-neutral-100">
+      <div className="max-w-4xl mx-auto space-y-32">
         
-        {/* Header */}
-        <div className="text-center space-y-4">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-100/80 backdrop-blur-sm border border-indigo-200/50 mb-4">
-            <Sparkles className="w-4 h-4 text-indigo-600" />
-            <span className="text-sm font-medium text-indigo-700">Get to know me</span>
-          </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extralight text-slate-900 tracking-tight">
-            About Me
-          </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-indigo-400 to-purple-400 mx-auto rounded-full"></div>
+        {/* Decorative Divider */}
+        <div className="flex items-center justify-center gap-3">
+          <div className="w-8 h-px bg-black"></div>
+          <svg width="20" height="12" viewBox="0 0 20 12" fill="none" className="opacity-80">
+            <path d="M0 6L5 0L10 6L15 0L20 6" stroke="black" strokeWidth="1"/>
+            <path d="M0 6L5 12L10 6L15 12L20 6" stroke="black" strokeWidth="1"/>
+          </svg>
+          <div className="w-8 h-px bg-black"></div>
         </div>
 
-        {/* Skills Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {skills.map((skill, idx) => (
-            <div 
-              key={idx} 
-              className="group backdrop-blur-lg bg-white/40 rounded-3xl p-8 md:p-10 border border-white/30 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 hover:bg-white/60"
-            >
-              <div className={`backdrop-blur-md bg-gradient-to-br ${skill.color} w-14 h-14 md:w-16 md:h-16 rounded-xl md:rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                <skill.icon className="w-7 h-7 md:w-8 md:h-8 text-white" />
+        {/* Skills */}
+        <div className="space-y-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
+            {skills.map((skill, idx) => (
+              <div key={idx} className="space-y-6 text-left md:text-center">
+                <div className="flex justify-start md:justify-center">
+                  <div className="w-12 h-12 rounded-full border border-black flex items-center justify-center bg-white">
+                    <skill.icon className="w-5 h-5 text-black" />
+                  </div>
+                </div>
+                <h3 className="text-xs font-semibold uppercase tracking-wide text-black">
+                  {skill.name}
+                </h3>
+                <p className="text-xs text-neutral-600 leading-relaxed">
+                  {skill.desc}
+                </p>
               </div>
-              <h3 className="text-xl md:text-2xl font-light text-slate-900 mb-3">{skill.name}</h3>
-              <p className="text-sm md:text-base text-slate-600 leading-relaxed">{skill.desc}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
         {/* Bio */}
-        <div className="backdrop-blur-lg bg-white/40 rounded-3xl p-12 border border-white/30 shadow-xl text-center">
-          <p className="text-lg md:text-xl text-slate-700 leading-relaxed font-light max-w-4xl mx-auto">
-            Hello! I'm a passionate <span className="font-semibold text-indigo-700">Machine Learning Engineer</span> with expertise in building intelligent systems that solve real-world problems. With a background in both ML/AI and full-stack development, I bring a unique perspective to every project.
+        <div className="text-left md:text-center space-y-8 max-w-2xl mx-auto py-16">
+          <p className="text-xs text-neutral-700 leading-relaxed">
+            Hello! I'm a passionate Machine Learning Engineer with expertise in building intelligent systems that solve real-world problems. With a background in both ML/AI and full-stack development, I bring a unique perspective to every project.
           </p>
-          <p className="text-base md:text-lg text-slate-600 leading-relaxed font-light max-w-3xl mx-auto mt-4">
+          <p className="text-xs text-neutral-600 leading-relaxed">
             My goal is to create products that leverage cutting-edge AI technology while maintaining exceptional user experiences. I enjoy tackling complex problems and finding elegant solutions through code and machine learning algorithms.
           </p>
         </div>
 
+        {/* Decorative Divider */}
+        <div className="flex items-center justify-center gap-3">
+          <div className="w-8 h-px bg-black"></div>
+          <svg width="20" height="12" viewBox="0 0 20 12" fill="none" className="opacity-80">
+            <path d="M0 6L5 0L10 6L15 0L20 6" stroke="black" strokeWidth="1"/>
+            <path d="M0 6L5 12L10 6L15 12L20 6" stroke="black" strokeWidth="1"/>
+          </svg>
+          <div className="w-8 h-px bg-black"></div>
+        </div>
+
         {/* Education */}
-        <div className="space-y-8">
-          <div className="text-center space-y-3">
-            <h3 className="text-3xl md:text-4xl font-extralight text-slate-900 tracking-tight">Education</h3>
-            <div className="w-16 h-0.5 bg-gradient-to-r from-rose-400 to-orange-400 mx-auto rounded-full"></div>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-6 md:gap-8 max-w-6xl mx-auto">
+        <div className="space-y-16">
+          <h3 className="text-left md:text-center text-sm font-semibold uppercase tracking-wider text-black">
+            Education
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
             {education.map((edu, idx) => (
-              <div key={idx} className="group relative backdrop-blur-xl bg-gradient-to-br from-white/60 to-white/40 rounded-2xl p-8 md:p-10 border border-white/40 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 overflow-hidden">
-                <div className={`absolute inset-0 bg-gradient-to-br ${edu.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}></div>
-                <div className="relative z-10">
-                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${edu.color} flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}>
-                    <edu.icon className="w-8 h-8 text-white" />
-                  </div>
-                  <div className="space-y-2">
-                    <div className="text-sm font-medium text-slate-500">{edu.year}</div>
-                    <h4 className="text-xl md:text-2xl font-semibold text-slate-900">{edu.degree}</h4>
-                    <p className="text-base md:text-lg text-indigo-600 font-medium">{edu.field}</p>
-                    <p className="text-sm md:text-base text-slate-600 pt-2">{edu.school}</p>
+              <div key={idx} className="text-left md:text-center space-y-4">
+                <div className="flex justify-start md:justify-center mb-6">
+                  <div className="w-10 h-10 rounded-full border border-black flex items-center justify-center bg-white">
+                    <edu.icon className="w-4 h-4 text-black" />
                   </div>
                 </div>
+                <div className="text-xs font-semibold text-black">{edu.degree}</div>
+                <p className="text-xs text-neutral-600">{edu.field}</p>
+                <p className="text-xs text-neutral-500 leading-relaxed">{edu.school}</p>
+                <div className="text-xs text-neutral-400">{edu.year}</div>
               </div>
             ))}
           </div>
         </div>
 
         {/* Leadership */}
-        <div className="space-y-8">
-          <div className="text-center space-y-3">
-            <h3 className="text-3xl md:text-4xl font-extralight text-slate-900 tracking-tight">Leadership & Impact</h3>
-            <div className="w-16 h-0.5 bg-gradient-to-r from-violet-400 to-fuchsia-400 mx-auto rounded-full"></div>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="space-y-16">
+          <h3 className="text-left md:text-center text-sm font-semibold uppercase tracking-wider text-black">
+            Leadership & Impact
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
             {leadership.map((role, idx) => (
-              <div key={idx} className="group relative backdrop-blur-xl bg-white/50 rounded-2xl p-8 md:p-10 border border-white/40 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
-                <div className={`absolute inset-0 bg-gradient-to-br ${role.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
-                <div className="relative z-10 space-y-4">
-                  <div className={`w-14 h-14 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-gradient-to-br ${role.gradient} flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
-                    <role.icon className="w-7 h-7 md:w-8 md:h-8 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="text-lg md:text-xl font-semibold text-slate-900 mb-1">{role.title}</h4>
-                    <p className="text-sm md:text-base font-medium text-indigo-600 mb-3">{role.org}</p>
-                    <p className="text-sm md:text-base text-slate-600 leading-relaxed">{role.desc}</p>
+              <div key={idx} className="text-left md:text-center space-y-4">
+                <div className="flex justify-start md:justify-center mb-6">
+                  <div className="w-10 h-10 rounded-full border border-black flex items-center justify-center bg-white">
+                    <role.icon className="w-4 h-4 text-black" />
                   </div>
                 </div>
+                <h4 className="text-xs font-semibold text-black">{role.title}</h4>
+                <p className="text-xs text-neutral-600">{role.org}</p>
+                <p className="text-xs text-neutral-500 leading-relaxed">{role.desc}</p>
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Bottom Decorative Divider */}
+        <div className="flex items-center justify-center gap-3">
+          <div className="w-8 h-px bg-black"></div>
+          <svg width="20" height="12" viewBox="0 0 20 12" fill="none" className="opacity-80">
+            <path d="M0 6L5 0L10 6L15 0L20 6" stroke="black" strokeWidth="1"/>
+            <path d="M0 6L5 12L10 6L15 12L20 6" stroke="black" strokeWidth="1"/>
+          </svg>
+          <div className="w-8 h-px bg-black"></div>
         </div>
 
       </div>
