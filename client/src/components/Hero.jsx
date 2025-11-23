@@ -23,7 +23,7 @@ export default function Hero() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         
         * {
           font-family: 'Inter', sans-serif;
@@ -32,15 +32,15 @@ export default function Hero() {
         .role-container {
           position: relative;
           overflow: visible;
-          height: 2rem;
-          min-height: 2rem;
+          height: 1.75rem;
+          min-height: 1.75rem;
         }
         
         .role-container-mobile {
           position: relative;
           overflow: visible;
-          height: 1.5rem;
-          min-height: 1.5rem;
+          height: 1rem;
+          min-height: 1rem;
         }
         
         .role-text {
@@ -65,46 +65,34 @@ export default function Hero() {
         }
       `}</style>
 
-      <section id="home" className="relative min-h-screen flex flex-col overflow-hidden">
-        {/* Desktop Split Background */}
-        <div className="hidden lg:block absolute inset-0">
-          <div className="absolute inset-0 bg-gray-200"></div>
-          {/* Shadow Layer */}
-          <div 
-            className="absolute inset-0"
-            style={{
-              clipPath: 'polygon(55% 0, 100% 0, 100% 100%, 35% 100%)',
-              background: 'linear-gradient(to right, rgba(0, 0, 0, 0.4) 0%, transparent 3%)',
-              pointerEvents: 'none'
-            }}
-          ></div>
-          <div 
-            className="absolute inset-0 bg-black"
-            style={{
-              clipPath: 'polygon(55% 0, 100% 0, 100% 100%, 35% 100%)'
-            }}
-          ></div>
-        </div>
+      <div className="min-h-screen flex flex-col bg-black">
+        {/* Desktop Version */}
+        <section id="home" className="hidden lg:block relative min-h-screen overflow-hidden">
+          {/* Desktop Split Background */}
+          <div className="absolute inset-0">
+            <div className="absolute inset-0 bg-white"></div>
+            <div 
+              className="absolute inset-0 bg-black"
+              style={{
+                clipPath: 'polygon(55% 0, 100% 0, 100% 100%, 40% 100%)'
+              }}
+            ></div>
+          </div>
 
-        {/* Mobile Background - Full Black */}
-        <div className="lg:hidden absolute inset-0 bg-black"></div>
-
-        {/* Content Container */}
-        <div className="relative z-10 w-full flex-1 flex flex-col">
-          {/* Desktop Layout */}
-          <div className="hidden lg:grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto px-8 lg:px-16 flex-1">
-            {/* Left Content - Moved more to the left */}
+          {/* Desktop Content */}
+          <div className="relative z-10 grid grid-cols-2 gap-12 items-center max-w-7xl mx-auto px-8 lg:px-16 h-screen">
+            {/* Left Content */}
             <div className="space-y-6 pr-16">
-              <div className="space-y-2">
-                <p className="text-lg text-gray-700 font-medium">Hi, I am</p>
-                <h1 className="text-6xl lg:text-7xl font-bold text-black leading-tight">
-                  ANAND<br />JYOTHIS G
+              <div className="space-y-3">
+                <p className="text-sm text-gray-500 font-light tracking-wide">Hi, I am</p>
+                <h1 className="text-6xl lg:text-7xl font-bold text-black leading-tight tracking-tight">
+                  Anand<br />Jyothis G
                 </h1>
-                <div className="role-container pt-2">
+                <div className="role-container pt-1">
                   {roles.map((role, index) => (
                     <p
                       key={index}
-                      className={`role-text text-xl text-gray-600 font-medium ${
+                      className={`role-text text-base text-gray-500 font-light ${
                         index === currentRole ? 'role-active' : index === (currentRole - 1 + roles.length) % roles.length ? 'role-exit' : 'role-enter'
                       }`}
                     >
@@ -115,38 +103,38 @@ export default function Hero() {
               </div>
 
               {/* Social Icons */}
-              <div className="flex gap-4 pt-4">
+              <div className="flex gap-3 pt-4">
                 <a 
                   href="mailto:your.email@example.com"
-                  className="w-12 h-12 bg-gray-300 hover:bg-gray-400 rounded-lg flex items-center justify-center transition-colors"
+                  className="w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center transition-colors"
                   aria-label="Email"
                 >
-                  <Mail className="w-5 h-5 text-black" />
+                  <Mail className="w-4 h-4 text-gray-700" />
                 </a>
                 <a 
                   href="https://github.com/yourusername"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-12 h-12 bg-gray-300 hover:bg-gray-400 rounded-lg flex items-center justify-center transition-colors"
+                  className="w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center transition-colors"
                   aria-label="GitHub"
                 >
-                  <Github className="w-5 h-5 text-black" />
+                  <Github className="w-4 h-4 text-gray-700" />
                 </a>
                 <a 
                   href="https://linkedin.com/in/yourusername"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-12 h-12 bg-gray-300 hover:bg-gray-400 rounded-lg flex items-center justify-center transition-colors"
+                  className="w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center transition-colors"
                   aria-label="LinkedIn"
                 >
-                  <Linkedin className="w-5 h-5 text-black" />
+                  <Linkedin className="w-4 h-4 text-gray-700" />
                 </a>
               </div>
             </div>
 
-            {/* Right Content - Desktop Image */}
-            <div className="relative flex justify-center lg:justify-end items-end h-full">
-              <div className="relative w-full max-w-lg lg:max-w-xl">
+            {/* Right Content - Image */}
+            <div className="relative flex justify-end items-end h-full">
+              <div className="relative w-full max-w-xl">
                 <img 
                   src="/images/hero.png" 
                   alt="Anand Jyothis G" 
@@ -160,98 +148,99 @@ export default function Hero() {
               </div>
             </div>
           </div>
+        </section>
 
-          {/* Mobile Layout */}
-          <div className="lg:hidden relative flex-1 flex flex-col">
-            {/* Top Section - Image with diagonal overlay */}
-            <div className="relative h-[60vh] overflow-hidden">
-              {/* Background Image */}
-              <img 
-                src="/images/hero.png" 
-                alt="Anand Jyothis G" 
-                className="absolute inset-0 w-full h-full object-cover object-top"
-              />
-              
-              {/* Diagonal Dark Overlay */}
-              <div 
-                className="absolute inset-0"
-                style={{
-                  background: 'linear-gradient(170deg, transparent 0%, transparent 50%, rgba(45, 45, 45, 0.98) 50%, rgba(45, 45, 45, 0.98) 100%)'
-                }}
-              ></div>
-            </div>
-
-            {/* Bottom Section - Content */}
-            <div className="relative flex-1 bg-gradient-to-b from-[#2d2d2d] to-[#1a1a1a] px-8 py-8 flex items-center">
-              <div className="w-full">
-                {/* Text Content */}
-                <div className="space-y-2">
-                  <p className="text-sm text-white/80 font-medium">Hi, I am</p>
-                  <h1 className="text-4xl sm:text-5xl font-bold text-white leading-tight tracking-tight">
-                    ANAND<br />JYOTHIS G
-                  </h1>
-                  <div className="role-container-mobile pt-2">
-                    {roles.map((role, index) => (
-                      <p
-                        key={index}
-                        className={`role-text text-sm text-white/70 font-normal ${
-                          index === currentRole ? 'role-active' : index === (currentRole - 1 + roles.length) % roles.length ? 'role-exit' : 'role-enter'
-                        }`}
-                      >
-                        {role}
-                      </p>
-                    ))}
-                  </div>
+        {/* Mobile Version - Perfect Blend Like Reference */}
+        <section id="home-mobile" className="lg:hidden relative w-full" style={{ height: 'calc(100vh - 64px)' }}>
+          {/* Full Screen Image */}
+          <img 
+            src="/images/hero.png" 
+            alt="Anand Jyothis G" 
+            className="absolute inset-0 w-full h-full object-cover object-top"
+            style={{ 
+              objectPosition: '50% 10%'
+            }}
+          />
+          
+          {/* Seamless Gradient Overlay */}
+          <div 
+            className="absolute inset-0"
+            style={{
+              background: 'linear-gradient(180deg, transparent 0%, transparent 40%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.8) 80%, #000000 100%)'
+            }}
+          />
+          
+          {/* Content at Bottom - NO BOX */}
+          <div className="absolute bottom-0 left-0 right-0 px-8 pb-12">
+            <div className="flex items-end justify-between gap-6">
+              {/* Left - Text */}
+              <div className="flex-1">
+                <p className="text-[10px] text-white/50 font-light mb-0.5 tracking-wide">Hi, I am</p>
+                <h1 className="text-xs font-small text-white leading-snug mb-0.5 whitespace-nowrap">
+                  ANAND <br/> JYOTHIS G
+                </h1>
+                <div className="role-container-mobile" style={{ height: '0.75rem', minHeight: '0.75rem' }}>
+                  {roles.map((role, index) => (
+                    <p
+                      key={index}
+                      className={`role-text text-[15px] text-white/60 font-light ${
+                        index === currentRole ? 'role-active' : index === (currentRole - 1 + roles.length) % roles.length ? 'role-exit' : 'role-enter'
+                      }`}
+                    >
+                      {role}
+                    </p>
+                  ))}
                 </div>
               </div>
 
-              {/* Social Icons - Right Side Vertical */}
-              <div className="absolute right-6 top-1/2 -translate-y-1/2 flex flex-col gap-4">
+              {/* Right - Social Icons Vertical */}
+              <div className="flex flex-col gap-2">
                 <a 
                   href="mailto:your.email@example.com"
-                  className="w-11 h-11 bg-white/5 backdrop-blur-sm hover:bg-white/10 rounded-full flex items-center justify-center transition-all border border-white/10"
+                  className="w-8 h-8 rounded-full flex items-center justify-center transition-all hover:bg-white/10"
                   aria-label="Email"
                 >
-                  <Mail className="w-5 h-5 text-white" />
+                  <Mail className="w-3.5 h-3.5 text-white/80" />
                 </a>
                 <a 
                   href="https://github.com/yourusername"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-11 h-11 bg-white/5 backdrop-blur-sm hover:bg-white/10 rounded-full flex items-center justify-center transition-all border border-white/10"
+                  className="w-8 h-8 rounded-full flex items-center justify-center transition-all hover:bg-white/10"
                   aria-label="GitHub"
                 >
-                  <Github className="w-5 h-5 text-white" />
+                  <Github className="w-3.5 h-3.5 text-white/80" />
                 </a>
                 <a 
                   href="https://linkedin.com/in/yourusername"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-11 h-11 bg-white/5 backdrop-blur-sm hover:bg-white/10 rounded-full flex items-center justify-center transition-all border border-white/10"
+                  className="w-8 h-8 rounded-full flex items-center justify-center transition-all hover:bg-white/10"
                   aria-label="LinkedIn"
                 >
-                  <Linkedin className="w-5 h-5 text-white" />
+                  <Linkedin className="w-3.5 h-3.5 text-white/80" />
                 </a>
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
-        {/* Description Box - Attached at Bottom */}
-        <div className="relative z-20 w-full bg-black/85 backdrop-blur-sm border-t border-white/5">
-          <div className="max-w-7xl mx-auto px-8 lg:px-16 py-10">
+        {/* Objective Box - Below Hero on Mobile */}
+        <div className="w-full bg-black border-t border-white/10">
+          <div className="max-w-7xl mx-auto px-5 lg:px-16 py-4 lg:py-10">
             <div className="max-w-5xl">
-              <h3 className="text-white text-sm font-bold tracking-widest uppercase mb-4">
+              <h3 className="text-white text-[9px] lg:text-xs font-semibold tracking-[0.2em] uppercase mb-2 lg:mb-3">
                 OBJECTIVE
               </h3>
-              <p className="text-white/60 text-xs leading-loose mb-5">
+              <p className="text-white/50 text-[11px] lg:text-sm leading-relaxed font-light">
                 Enthusiastic Machine Learning undergraduate with hands-on experience in ML, deep learning, and AI-driven healthcare
                 solutions. Proficient in C, Java, and Python, with expertise in UI/UX design, Figma, and AI model deployment. Skilled
-                in computer vision and natural language processing.</p>
+                in computer vision and natural language processing.
+              </p>
             </div>
           </div>
         </div>
-      </section>
+      </div>
     </>
   );
 }
