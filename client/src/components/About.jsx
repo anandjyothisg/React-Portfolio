@@ -1,7 +1,88 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Code, Sparkles, Rocket, Brain, GraduationCap, Users, Award, Trophy, Zap, Binary } from 'lucide-react';
 
 export default function About() {
+  // Gallery images
+  const images = [
+    '/images/8.jpg',
+    '/images/1.jpg',
+    '/images/2.jpg',
+    '/images/3.jpg',
+    '/images/4.jpg',
+    '/images/5.jpg',
+    '/images/6.jpg',
+    '/images/7.jpg'
+  ];
+
+  // State to track which image is shown in each slot
+  const [visibleImages, setVisibleImages] = useState([0, 1, 2, 3]);
+  const [nextImages, setNextImages] = useState([4, 5, 6, 7]);
+  const [transitioning, setTransitioning] = useState([false, false, false, false]);
+
+  // Get next available image that's not currently visible
+  const getNextImage = (currentImages, currentIndex) => {
+    let nextIndex = (currentIndex + 4) % images.length;
+    let attempts = 0;
+    
+    // Find an image that's not currently visible in any slot
+    while (currentImages.includes(nextIndex) && attempts < images.length) {
+      nextIndex = (nextIndex + 1) % images.length;
+      attempts++;
+    }
+    
+    return nextIndex;
+  };
+
+  useEffect(() => {
+    // Stagger the transitions for each slot
+    const intervals = [
+      { slot: 0, delay: 0 },
+      { slot: 1, delay: 3000 },
+      { slot: 2, delay: 6000 },
+      { slot: 3, delay: 9000 }
+    ];
+
+    const timers = intervals.map(({ slot, delay }) => {
+      return setTimeout(() => {
+        const interval = setInterval(() => {
+          // Start transition
+          setTransitioning(prev => {
+            const newState = [...prev];
+            newState[slot] = true;
+            return newState;
+          });
+
+          // After fade out, update to next image
+          setTimeout(() => {
+            setVisibleImages(prev => {
+              const newImages = [...prev];
+              const currentImage = newImages[slot];
+              const nextImage = getNextImage(newImages, currentImage);
+              newImages[slot] = nextImage;
+              return newImages;
+            });
+
+            // End transition
+            setTimeout(() => {
+              setTransitioning(prev => {
+                const newState = [...prev];
+                newState[slot] = false;
+                return newState;
+              });
+            }, 100);
+          }, 600);
+        }, 12000);
+
+        // Store interval ID for cleanup
+        return interval;
+      }, delay);
+    });
+
+    return () => {
+      timers.forEach(timer => clearTimeout(timer));
+    };
+  }, [images.length]);
+
   const skills = [
     { 
       icon: Brain, 
@@ -100,14 +181,147 @@ export default function About() {
           </div>
         </div>
 
-        {/* Bio */}
-        <div className="text-left md:text-center space-y-8 max-w-2xl mx-auto py-16">
-          <p className="text-xs text-neutral-700 leading-relaxed">
-            Hello! I'm a passionate Machine Learning Engineer with expertise in building intelligent systems that solve real-world problems. With a background in both ML/AI and full-stack development, I bring a unique perspective to every project.
-          </p>
-          <p className="text-xs text-neutral-600 leading-relaxed">
-            My goal is to create products that leverage cutting-edge AI technology while maintaining exceptional user experiences. I enjoy tackling complex problems and finding elegant solutions through code and machine learning algorithms.
-          </p>
+        {/* Bio with Gallery - Desktop: Side by Side, Mobile: Stacked */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center py-16">
+          
+          {/* Gallery - Left Side (Desktop) / Top (Mobile) */}
+          <div className="w-full">
+            {/* Mobile & Tablet Layout */}
+            <div className="grid lg:hidden grid-cols-2 gap-3">
+              {/* Slot 1 - Portrait */}
+              <div className="aspect-[3/4] overflow-hidden rounded-lg shadow-md bg-neutral-100 relative">
+                <img
+                  key={`mobile-${visibleImages[0]}`}
+                  src={images[visibleImages[0]]}
+                  alt="Gallery 1"
+                  className="w-full h-full object-cover absolute inset-0"
+                  style={{ 
+                    animation: transitioning[0] ? 'none' : 'slideFromLeft 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                    opacity: transitioning[0] ? 0 : 1,
+                    transition: 'opacity 0.6s cubic-bezier(0.4, 0.0, 0.2, 1)'
+                  }}
+                />
+              </div>
+
+              {/* Slot 2 - Portrait (offset vertically) */}
+              <div className="aspect-[3/4] overflow-hidden rounded-lg shadow-md bg-neutral-100 mt-8 relative">
+                <img
+                  key={`mobile-${visibleImages[1]}`}
+                  src={images[visibleImages[1]]}
+                  alt="Gallery 2"
+                  className="w-full h-full object-cover absolute inset-0"
+                  style={{ 
+                    animation: transitioning[1] ? 'none' : 'slideFromRight 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                    opacity: transitioning[1] ? 0 : 1,
+                    transition: 'opacity 0.6s cubic-bezier(0.4, 0.0, 0.2, 1)'
+                  }}
+                />
+              </div>
+
+              {/* Slot 3 - Portrait (offset vertically opposite) */}
+              <div className="aspect-[3/4] overflow-hidden rounded-lg shadow-md bg-neutral-100 -mt-4 relative">
+                <img
+                  key={`mobile-${visibleImages[2]}`}
+                  src={images[visibleImages[2]]}
+                  alt="Gallery 3"
+                  className="w-full h-full object-cover absolute inset-0"
+                  style={{ 
+                    animation: transitioning[2] ? 'none' : 'slideFromTop 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                    opacity: transitioning[2] ? 0 : 1,
+                    transition: 'opacity 0.6s cubic-bezier(0.4, 0.0, 0.2, 1)'
+                  }}
+                />
+              </div>
+
+              {/* Slot 4 - Portrait */}
+              <div className="aspect-[3/4] overflow-hidden rounded-lg shadow-md bg-neutral-100 relative">
+                <img
+                  key={`mobile-${visibleImages[3]}`}
+                  src={images[visibleImages[3]]}
+                  alt="Gallery 4"
+                  className="w-full h-full object-cover absolute inset-0"
+                  style={{ 
+                    animation: transitioning[3] ? 'none' : 'slideFromBottom 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                    opacity: transitioning[3] ? 0 : 1,
+                    transition: 'opacity 0.6s cubic-bezier(0.4, 0.0, 0.2, 1)'
+                  }}
+                />
+              </div>
+            </div>
+
+            {/* Desktop Layout */}
+            <div className="hidden lg:grid grid-cols-2 gap-4">
+              {/* Slot 1 - Portrait */}
+              <div className="aspect-[3/4] overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 bg-neutral-100 relative">
+                <img
+                  key={`desktop-${visibleImages[0]}`}
+                  src={images[visibleImages[0]]}
+                  alt="Gallery 1"
+                  className="w-full h-full object-cover absolute inset-0"
+                  style={{ 
+                    animation: transitioning[0] ? 'none' : 'slideFromLeft 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                    opacity: transitioning[0] ? 0 : 1,
+                    transition: 'opacity 0.6s cubic-bezier(0.4, 0.0, 0.2, 1)'
+                  }}
+                />
+              </div>
+
+              {/* Slot 2 - Portrait (offset down) */}
+              <div className="aspect-[3/4] overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 bg-neutral-100 mt-12 relative">
+                <img
+                  key={`desktop-${visibleImages[1]}`}
+                  src={images[visibleImages[1]]}
+                  alt="Gallery 2"
+                  className="w-full h-full object-cover absolute inset-0"
+                  style={{ 
+                    animation: transitioning[1] ? 'none' : 'slideFromRight 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                    opacity: transitioning[1] ? 0 : 1,
+                    transition: 'opacity 0.6s cubic-bezier(0.4, 0.0, 0.2, 1)'
+                  }}
+                />
+              </div>
+
+              {/* Slot 3 - Portrait (offset up) */}
+              <div className="aspect-[3/4] overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 bg-neutral-100 -mt-8 relative">
+                <img
+                  key={`desktop-${visibleImages[2]}`}
+                  src={images[visibleImages[2]]}
+                  alt="Gallery 3"
+                  className="w-full h-full object-cover absolute inset-0"
+                  style={{ 
+                    animation: transitioning[2] ? 'none' : 'slideFromTop 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                    opacity: transitioning[2] ? 0 : 1,
+                    transition: 'opacity 0.6s cubic-bezier(0.4, 0.0, 0.2, 1)'
+                  }}
+                />
+              </div>
+
+              {/* Slot 4 - Portrait */}
+              <div className="aspect-[3/4] overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 bg-neutral-100 mt-4 relative">
+                <img
+                  key={`desktop-${visibleImages[3]}`}
+                  src={images[visibleImages[3]]}
+                  alt="Gallery 4"
+                  className="w-full h-full object-cover absolute inset-0"
+                  style={{ 
+                    animation: transitioning[3] ? 'none' : 'slideFromBottom 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                    opacity: transitioning[3] ? 0 : 1,
+                    transition: 'opacity 0.6s cubic-bezier(0.4, 0.0, 0.2, 1)'
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Bio Text - Right Side (Desktop) / Bottom (Mobile) */}
+          <div className="space-y-8">
+            <p className="text-xs text-neutral-700 leading-relaxed">
+              Hello! I'm a passionate Machine Learning Engineer with expertise in building intelligent systems that solve real-world problems. With a background in both ML/AI and full-stack development, I bring a unique perspective to every project.
+            </p>
+            <p className="text-xs text-neutral-600 leading-relaxed">
+              My goal is to create products that leverage cutting-edge AI technology while maintaining exceptional user experiences. I enjoy tackling complex problems and finding elegant solutions through code and machine learning algorithms.
+            </p>
+          </div>
         </div>
 
         {/* Decorative Divider */}
@@ -174,6 +388,52 @@ export default function About() {
         </div>
 
       </div>
+
+      <style jsx>{`
+        @keyframes slideFromLeft {
+          0% {
+            opacity: 0;
+            transform: translateX(-100%) scale(0.9);
+          }
+          100% {
+            opacity: 1;
+            transform: translateX(0) scale(1);
+          }
+        }
+
+        @keyframes slideFromRight {
+          0% {
+            opacity: 0;
+            transform: translateX(100%) scale(0.9);
+          }
+          100% {
+            opacity: 1;
+            transform: translateX(0) scale(1);
+          }
+        }
+
+        @keyframes slideFromTop {
+          0% {
+            opacity: 0;
+            transform: translateY(-100%) scale(0.9);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+
+        @keyframes slideFromBottom {
+          0% {
+            opacity: 0;
+            transform: translateY(100%) scale(0.9);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+      `}</style>
     </section>
   );
 }
